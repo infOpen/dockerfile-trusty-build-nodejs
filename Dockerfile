@@ -12,3 +12,9 @@ RUN wget -q https://deb.nodesource.com/node_6.x/pool/main/n/nodejs/nodejs-dbg_6.
         dpkg -i ./nodejs-dbg_6.3.0-1nodesource1~trusty1_amd64.deb && \
         rm ./nodejs-dbg_6.3.0-1nodesource1~trusty1_amd64.deb && \
         rm ./nodejs_6.3.0-1nodesource1~trusty1_amd64.deb
+
+# Locale management
+RUN locale-gen en_US.UTF-8
+RUN echo 'LC_ALL=en_US.UTF-8' > /etc/default/locale
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
