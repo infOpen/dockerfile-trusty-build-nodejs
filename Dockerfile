@@ -3,7 +3,7 @@ MAINTAINER Alexandre Chaussier <a.chaussier@infopen.pro>
 
 # Install NodeJS dependencies
 RUN apt-get update && \
-    apt-get install -y rlwrap
+    apt-get install -y rlwrap xvfb
 
 # Install nodejs packages to manage javascript jobs
 RUN wget -q https://deb.nodesource.com/node_6.x/pool/main/n/nodejs/nodejs-dbg_6.3.0-1nodesource1~trusty1_amd64.deb && \
@@ -18,3 +18,10 @@ RUN locale-gen en_US.UTF-8
 RUN echo 'LC_ALL=en_US.UTF-8' > /etc/default/locale
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
+
+# Manage headless chromium browser
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    dpkg --unpack google-chrome-stable_current_amd64.deb && \
+    apt-get install -f -y && \
+    apt-get clean && \
+    rm google-chrome-stable_current_amd64.deb
